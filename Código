@@ -1,3 +1,9 @@
+ /*Nome: Gabrielle Lattanzi
+Professor:Sergio Netto
+N2 - Prog II
+Matrícula: 2001230019
+*/
+
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
@@ -100,7 +106,7 @@ void imprimir(residencia*r, int n, float r3, float r5){
 
 	
 	printf("\nQuestão 4: O pesquisado de menor consumo:\n");
-	printf("%s %s\t%s\t%d\t%s\t%s\t%.2f\t%.2f\n", resp4.codigo, resp4.regiao, resp4.tipo, resp4.moradores, resp4.interesse, resp4.rede, resp4.cmes, resp4.cmor);
+	printf("%s %s\t%s\t%d\t%s\t%s\t%.2f\t%.2f", resp4.codigo, resp4.regiao, resp4.tipo, resp4.moradores, resp4.interesse, resp4.rede, resp4.cmes, resp4.cmor);
 	
 	
 	printf("\n============================================================\n");
@@ -109,8 +115,8 @@ void imprimir(residencia*r, int n, float r3, float r5){
 
 	printf("\n============================================================\n");
 
-	printf("\nQuestão 6:\nO percentual de pesquisados negativos que tem rede instalada: %.2f%%\nO percentual de pesquisados  positivo que não tem rede instalada: %.2f%%", negativo, positivo);
-
+	printf("\nQuestão 6:\nO percentual de pesquisados negativos que tem rede instalada: %.2f%%\nO percentual de pesquisados positivo que não tem rede instalada: %.2f%%", negativo, positivo);
+	
 }
 
 float q3(residencia*r, int n){
@@ -131,19 +137,15 @@ float q3(residencia*r, int n){
 	return(resp3);
 }
 
-float q4(residencia*r, int n){
-	int i;
-	
+void q4(residencia*r, int n){
 	float menor=100;
 	
-	for(i=0;i<n;i++){
+	for(int i=0;i<n;i++){
 		if(r[i].cmes<menor){
 			menor=r[i].cmes;
-			
-		}				
+			resp4=r[i];
+		}
 	}
-	
-	resp4=r[i]
 }
 
 float q5(residencia*r, int n){
@@ -187,6 +189,8 @@ void q6(residencia*r, int n){
 	positivo = (pos / n) * 100;
 }
 
+
+
 void arquivo(residencia*r, int n, float r3, float r5){
 	FILE *arquivo;
 	arquivo = fopen("arquivo_N2.txt", "w");
@@ -203,10 +207,8 @@ fprintf(arquivo, "Código\t Região\t\tTipo\t  Moradores\tInteresse\tRede\tConM�
 
 	fprintf(arquivo, "\n============================================================\n");
 
-	/*
-	printf("\nQuestão 4: O pesquisado de menor consumo:\n");
-	printf("%s %s\t%s\t%d\t%s\t%s\t%.2f\t%.2f\n", resp4.codigo, resp4.regiao, resp4.tipo, resp4.moradores, resp4.interesse, resp4.rede, resp4.cmes, resp4.cmor);
-	*/
+	fprintf(arquivo, "\nQuestão 4: O pesquisado de menor consumo:\n");
+	fprintf(arquivo, "%s %s\t%s\t%d\t%s\t%s\t%.2f\t%.2f\n", resp4.codigo, resp4.regiao, resp4.tipo, resp4.moradores, resp4.interesse, resp4.rede, resp4.cmes, resp4.cmor);
 	
 	fprintf(arquivo, "\n============================================================\n");
 	
@@ -233,7 +235,7 @@ int main(){
 	
 	preencher(r, 105);
 	float r3 = q3(r,105);
-	q4(r,106);
+	q4(r,105);
 	float r5 = q5(r,105);
 	q6(r,105);
 	imprimir(r, 105, r3, r5);
